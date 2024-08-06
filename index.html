@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Gray Gradient Background</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(to bottom, #696969, #FFFFFF);
+            font-family: 'Orbitron', sans-serif;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .header-bar {
+            width: 100%;
+            background-color: #000000; /* Black background for the header */
+            padding: 10px 20px; /* Some padding for the header */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-bar h1 {
+            margin: 0;
+            color: #FFFFFF; /* White text */
+            font-size: 1.5em; /* Smaller font size */
+        }
+
+        .header-bar button {
+            background: transparent; /* Transparent background */
+            border: none;
+            color: #FFFFFF; /* White text */
+            font-size: 1em; /* Button font size */
+            font-family: sans-serif; /* Sans serif font */
+            cursor: pointer;
+        }
+
+        /* Additional styling to match a full-page display if needed */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <h1>RoServers</h1>
+        <button onclick="toggleDropdown()">Link Roblox Account</button>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            alert('Link Roblox Account button clicked!');
+        }
+    </script>
+</body>
+</html>
