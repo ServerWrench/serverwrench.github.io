@@ -14,8 +14,6 @@
             font-family: 'Orbitron', sans-serif;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
             box-sizing: border-box;
             position: relative;
         }
@@ -47,8 +45,12 @@
         }
 
         .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            margin-top: 20px;
         }
 
         .content input {
@@ -92,7 +94,7 @@
 
     <script>
         function showLinkAccount() {
-            document.getElementById('linkAccountContent').style.display = 'block';
+            document.getElementById('linkAccountContent').style.display = 'flex';
         }
 
         function generateAndSendCode() {
