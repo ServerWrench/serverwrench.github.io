@@ -3,207 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ServerWrench</title>
+    <title>Scroll Animated Page</title>
     <style>
+        /* General Styles */
         body {
             margin: 0;
-            padding: 0;
             font-family: Arial, sans-serif;
-            overflow-x: hidden;
-            background-color: #1b1b1b;
-            color: #fff;
+            background-color: #1a1a1a;
+            color: white;
         }
 
-        /* Topbar/Header */
-        .topbar {
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Header */
+        .navbar {
             position: fixed;
-            top: 0;
             width: 100%;
-            height: 60px;
+            top: 0;
+            left: 0;
             background-color: #333;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            z-index: 10;
+            padding: 10px 20px;
+            align-items: center;
+            z-index: 1000;
         }
 
-        .topbar h1 {
-            margin: 0;
-            font-size: 24px;
+        .navbar-left {
+            font-size: 1.5em;
+            font-weight: bold;
         }
 
-        .topbar .buttons {
+        .navbar-right {
             display: flex;
+            align-items: center;
         }
 
-        .topbar button {
-            margin-left: 5px;
-            padding: 8px 12px;
-            border: none;
+        .navbar-right a {
+            padding: 8px 16px;
             background-color: #555;
-            color: #fff;
-            cursor: pointer;
+            color: white;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
-            font-size: 14px;
+            margin-left: 10px;
+            transition: background-color 0.3s;
         }
 
-        .topbar button:hover {
+        .navbar-right a:hover {
             background-color: #777;
         }
 
+        /* Section Styles */
         section {
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 100px 20px;
-            font-size: 2em;
-            transition: all 1s ease-out;
+            padding: 0 50px;
+            scroll-snap-align: start;
         }
 
-        /* Section with image on the right */
+        .dark-section {
+            background-color: #111;
+        }
+
+        .light-section {
+            background-color: #222;
+        }
+
         .section-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-        }
-
-        .section-text {
-            flex: 1;
-            max-width: 50%;
+            width: 50%;
         }
 
         .section-image {
-            flex: 1;
-            max-width: 50%;
+            width: 400px;
+            height: 300px;
+            background-color: #ccc;
             display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+            justify-content: center;
+            align-items: center;
+            margin-right: 50px;
         }
 
-        .section-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .section-image p {
+        .image-caption {
+            text-align: center;
             margin-top: 10px;
-            font-size: 0.6em;
             color: #aaa;
         }
 
-        .section1 {
-            background-color: #222;
-            opacity: 0;
-            transform: translateY(100px);
-        }
-
-        .section2 {
-            background-color: #333;
-            opacity: 0;
-            transform: translateY(100px);
-        }
-
-        .section3 {
-            background-color: #444;
-            opacity: 0;
-            transform: translateY(100px);
-        }
-
-        .visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .section-text, .section-image {
-                max-width: 100%;
-                text-align: center;
-            }
-            .section-image img {
-                width: 90%;
-            }
-            .topbar {
-                flex-direction: column;
-                height: auto;
-            }
-            .topbar h1 {
-                margin-bottom: 10px;
-            }
+        /* Scroll Snap Container */
+        .scroll-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
         }
     </style>
 </head>
 <body>
-
-    <!-- Topbar/Header -->
-    <div class="topbar">
-        <h1>My Website</h1>
-        <div class="buttons">
-            <button>Login</button>
-            <button>Sign Up</button>
+    <!-- Header -->
+    <div class="navbar">
+        <div class="navbar-left">My Website</div>
+        <div class="navbar-right">
+            <a href="#" class="login">Login</a>
+            <a href="#" class="signup">Sign Up</a>
         </div>
     </div>
 
-    <!-- Scroll Sections -->
-    <section class="section1">
-        <div class="section-content">
-            <div class="section-text">
-                Welcome to Section 1!
+    <!-- Scroll Container -->
+    <div class="scroll-container">
+        <!-- Section 1 -->
+        <section class="dark-section">
+            <div class="section-content">
+                <h1>Welcome to Section 1!</h1>
             </div>
-            <div class="section-image">
-                <img src="https://via.placeholder.com/400x300" alt="Section 1 Image">
-                <p>Caption for Section 1 Image</p>
+            <div>
+                <div class="section-image">
+                    <p>400 x 300</p>
+                </div>
+                <div class="image-caption">Caption for Section 1 Image</div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section2">
-        <div class="section-content">
-            <div class="section-text">
-                Welcome to Section 2!
+        <!-- Section 2 -->
+        <section class="light-section">
+            <div class="section-content">
+                <h1>Welcome to Section 2!</h1>
             </div>
-            <div class="section-image">
-                <img src="https://via.placeholder.com/400x300" alt="Section 2 Image">
-                <p>Caption for Section 2 Image</p>
+            <div>
+                <div class="section-image">
+                    <p>400 x 300</p>
+                </div>
+                <div class="image-caption">Caption for Section 2 Image</div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section3">
-        <div class="section-content">
-            <div class="section-text">
-                Welcome to Section 3!
+        <!-- Section 3 -->
+        <section class="dark-section">
+            <div class="section-content">
+                <h1>Welcome to Section 3!</h1>
             </div>
-            <div class="section-image">
-                <img src="https://via.placeholder.com/400x300" alt="Section 3 Image">
-                <p>Caption for Section 3 Image</p>
+            <div>
+                <div class="section-image">
+                    <p>400 x 300</p>
+                </div>
+                <div class="image-caption">Caption for Section 3 Image</div>
             </div>
-        </div>
-    </section>
-
-    <!-- JavaScript for Scroll Animation -->
-    <script>
-        function scrollAnimation() {
-            const sections = document.querySelectorAll("section");
-
-            sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-
-                if (sectionTop < screenPosition) {
-                    section.classList.add("visible");
-                }
-            });
-        }
-
-        window.addEventListener("scroll", scrollAnimation);
-    </script>
-
+        </section>
+    </div>
 </body>
 </html>
