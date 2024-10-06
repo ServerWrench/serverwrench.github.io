@@ -3,131 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Linking</title>
+    <title>Scroll Animated Page</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
-
         body {
             margin: 0;
-            height: 100vh;
-            background: linear-gradient(to bottom, #696969, #FFFFFF);
-            font-family: 'Orbitron', sans-serif;
-            display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
-            position: relative;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
         }
 
-        .header-bar {
-            width: 100%;
-            background-color: #000000;
-            padding: 10px 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        section {
+            min-height: 100vh;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            box-sizing: border-box;
-        }
-
-        .header-bar h1 {
-            margin: 0;
-            color: #FFFFFF;
-            font-size: 1.5em;
-        }
-
-        .header-bar button {
-            background: transparent;
-            border: none;
-            color: #FFFFFF;
-            font-size: 1em;
-            font-family: sans-serif;
-            cursor: pointer;
-        }
-
-        .content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
+            font-size: 3em;
+            color: white;
         }
 
-        .content input {
-            padding: 10px;
-            margin: 10px;
-            font-size: 1em;
-            border: 1px solid #000;
-            border-radius: 5px;
+        .section1 {
+            background-color: #3498db;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 1s ease-out;
         }
 
-        .content button {
-            padding: 10px 20px;
-            font-size: 1em;
-            font-family: sans-serif;
-            cursor: pointer;
-            border-radius: 5px;
-            background: #000;
-            color: #fff;
-            border: none;
+        .section2 {
+            background-color: #e74c3c;
+            transform: translateX(-100px);
+            opacity: 0;
+            transition: all 1s ease-out;
         }
 
-        .random-number {
-            margin-top: 20px;
-            font-size: 1.2em;
-            font-weight: bold;
+        .section3 {
+            background-color: #2ecc71;
+            transform: translateY(-100px);
+            opacity: 0;
+            transition: all 1s ease-out;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translate(0);
         }
     </style>
 </head>
 <body>
-    <div class="header-bar">
-        <h1>RoServers</h1>
-        <button onclick="showLinkAccount()">Link Roblox Account</button>
-    </div>
 
-    <div class="content" id="linkAccountContent" style="display: none;">
-        <h2>Link Your Roblox Account</h2>
-        <input type="text" id="robloxUsername" placeholder="Enter your Roblox Username">
-        <button onclick="generateAndSendCode()">Link</button>
-        <div id="randomNumber" class="random-number"></div>
-    </div>
+    <section class="section1">Section 1</section>
+    <section class="section2">Section 2</section>
+    <section class="section3">Section 3</section>
 
     <script>
-        function showLinkAccount() {
-            document.getElementById('linkAccountContent').style.display = 'flex';
+        function scrollAnimation() {
+            const sections = document.querySelectorAll("section");
+
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+
+                if (sectionTop < screenPosition) {
+                    section.classList.add("visible");
+                }
+            });
         }
 
-        function generateAndSendCode() {
-            let username = document.getElementById('robloxUsername').value;
-            if (username.trim() === "") {
-                alert("Please enter your Roblox username.");
-                return;
-            }
-
-            // Generate a random 4-digit number
-            let randomNumber = Math.floor(1000 + Math.random() * 9000);
-
-            // Display the random number
-            document.getElementById('randomNumber').textContent = `Your code: ${randomNumber}`;
-
-            // Send the username and random number to your server (pseudo-code)
-            fetch('https://your-server.com/api/sendCode', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username: username, code: randomNumber })
-            }).then(response => response.json())
-              .then(data => {
-                  if (data.success) {
-                      alert("Code sent to the Roblox game. Please join the game to complete the linking process.");
-                  } else {
-                      alert("Failed to send code. Please try again.");
-                  }
-              }).catch(error => {
-                  alert("An error occurred: " + error.message);
-              });
-        }
+        window.addEventListener("scroll", scrollAnimation);
     </script>
+
 </body>
 </html>
