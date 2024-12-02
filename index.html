@@ -115,24 +115,32 @@
             }
         }
 
-        .dark-mode {
-            background-color: #121212;
-            color: white;
-        }
-
-        .dark-mode .nav-button, .dark-mode .search-button {
+        /* Default light mode */
+        body {
             background-color: white;
             color: black;
         }
 
-        .light-mode {
-            background-color: white;
-            color: black;
-        }
-
-        .light-mode .nav-button, .light-mode .search-button {
+        .nav-button, .search-button {
             background-color: black;
             color: white;
+        }
+
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: white;
+            }
+
+            .nav-button, .search-button {
+                background-color: white;
+                color: black;
+            }
+
+            .footer {
+                color: #aaaaaa;
+            }
         }
     </style>
 </head>
