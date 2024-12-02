@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Dashboard</title>
+  <style>
+    /* Root styles for system default theme */
+    :root {
+      --bg-color: white;
+      --text-color: black;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #121212;
+        --text-color: white;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .dashboard-header {
+      width: 100%;
+      text-align: center;
+      padding: 1rem;
+      background: var(--bg-color);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      animation: slideDown 1s ease-out;
+    }
+
+    .dashboard-main {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      padding: 1rem;
+      flex-grow: 1;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    .card {
+      background: var(--bg-color);
+      border: 1px solid var(--text-color);
+      border-radius: 8px;
+      padding: 1rem;
+      width: 300px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="dashboard-header">
+    <h1>Dashboard</h1>
+  </header>
+  <main class="dashboard-main">
+    <section class="card">
+      <h2>Card 1</h2>
+      <p>Some content goes here.</p>
+    </section>
+    <section class="card">
+      <h2>Card 2</h2>
+      <p>Another piece of content.</p>
+    </section>
+    <section class="card">
+      <h2>Card 3</h2>
+      <p>Yet more content for the dashboard.</p>
+    </section>
+  </main>
+</body>
+</html>
