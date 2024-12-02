@@ -172,11 +172,10 @@
         function submitSearch() {
             var query = document.getElementById('searchInput').value;
             if (query) {
-                const currentUrl = window.location.href;
-                const newUrl = currentUrl.includes('?') 
-                    ? `${currentUrl}&q=${encodeURIComponent(query)}` 
-                    : `${currentUrl}?q=${encodeURIComponent(query)}`;
-                window.location.href = newUrl;
+                const currentUrl = new URL(window.location.href);
+                currentUrl.searchParams.delete('q');
+                currentUrl.searchParams.append('q', query);
+                window.location.href = currentUrl.toString();
             }
         }
 
