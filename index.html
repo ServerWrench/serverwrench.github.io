@@ -173,8 +173,8 @@
             var query = document.getElementById('searchInput').value;
             if (query) {
                 const currentUrl = new URL(window.location.href);
-                currentUrl.searchParams.delete('q');
-                currentUrl.searchParams.append('q', query);
+                currentUrl.search = ''; // Clear all existing parameters
+                currentUrl.searchParams.append('q', query); // Add the new query parameter
                 window.location.href = currentUrl.toString();
             }
         }
