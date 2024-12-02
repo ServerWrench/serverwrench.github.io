@@ -3,154 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scroll Animated Page</title>
+    <title>ServerWrench</title>
     <style>
-        /* General Styles */
         body {
+            font-family: 'Arial', sans-serif;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: white;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* Header */
-        .navbar {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            background-color: #333;
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 20px;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .navbar-left {
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-
-        .navbar-right {
-            display: flex;
-            align-items: center;
-        }
-
-        .navbar-right a {
-            padding: 8px 16px;
-            background-color: #555;
-            color: white;
-            border-radius: 5px;
-            margin-left: 10px;
-            transition: background-color 0.3s;
-        }
-
-        .navbar-right a:hover {
-            background-color: #777;
-        }
-
-        /* Section Styles */
-        section {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 50px;
-            scroll-snap-align: start;
-        }
-
-        .dark-section {
-            background-color: #111;
-        }
-
-        .light-section {
-            background-color: #222;
-        }
-
-        .section-content {
-            width: 50%;
-        }
-
-        .section-image {
-            width: 400px;
-            height: 300px;
-            background-color: #ccc;
+            padding: 0;
+            background-color: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-right: 50px;
-        }
-
-        .image-caption {
-            text-align: center;
-            margin-top: 10px;
-            color: #aaa;
-        }
-
-        /* Scroll Snap Container */
-        .scroll-container {
-            scroll-snap-type: y mandatory;
-            overflow-y: scroll;
             height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #0056b3;
+        }
+
+        .title {
+            font-size: 48px;
+            color: #333;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <div class="navbar">
-        <div class="navbar-left">My Website</div>
-        <div class="navbar-right">
-            <a href="#" class="login">Login</a>
-            <a href="#" class="signup">Sign Up</a>
-        </div>
-    </div>
-
-    <!-- Scroll Container -->
-    <div class="scroll-container">
-        <!-- Section 1 -->
-        <section class="dark-section">
-            <div class="section-content">
-                <h1>Welcome to Section 1!</h1>
-            </div>
-            <div>
-                <div class="section-image">
-                    <p>400 x 300</p>
-                </div>
-                <div class="image-caption">Caption for Section 1 Image</div>
-            </div>
-        </section>
-
-        <!-- Section 2 -->
-        <section class="light-section">
-            <div class="section-content">
-                <h1>Welcome to Section 2!</h1>
-            </div>
-            <div>
-                <div class="section-image">
-                    <p>400 x 300</p>
-                </div>
-                <div class="image-caption">Caption for Section 2 Image</div>
-            </div>
-        </section>
-
-        <!-- Section 3 -->
-        <section class="dark-section">
-            <div class="section-content">
-                <h1>Welcome to Section 3!</h1>
-            </div>
-            <div>
-                <div class="section-image">
-                    <p>400 x 300</p>
-                </div>
-                <div class="image-caption">Caption for Section 3 Image</div>
-            </div>
-        </section>
+    <div class="container">
+        <header>
+            <nav class="navbar">
+                <button class="nav-button" onclick="location.href='#'">Home</button>
+                <button class="nav-button" onclick="location.href='#'">Login</button>
+                <button class="nav-button" onclick="location.href='#'">Sign Up</button>
+                <button class="nav-button" onclick="location.href='#'">Dashboard</button>
+            </nav>
+            <h1 class="title">ServerWrench</h1>
+        </header>
     </div>
 </body>
 </html>
