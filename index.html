@@ -12,18 +12,22 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             transition: background-color 0.3s, color 0.3s;
             position: relative;
         }
 
         .container {
             text-align: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 1200px;
             animation: fadeIn 1.5s ease-in-out;
         }
 
         .navbar {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             margin-bottom: 20px;
         }
@@ -33,7 +37,7 @@
             color: white;
             border: none;
             padding: 10px 20px;
-            margin: 0 10px;
+            margin: 5px;
             cursor: pointer;
             font-size: 16px;
             border-radius: 5px;
@@ -57,17 +61,19 @@
 
         .search-box {
             display: flex;
+            flex-grow: 1;
+            max-width: 500px;
             border: 2px solid #007BFF;
             border-radius: 25px;
             overflow: hidden;
         }
 
         .search-input {
+            flex-grow: 1;
             border: none;
             padding: 10px;
             font-size: 16px;
             outline: none;
-            flex-grow: 1;
         }
 
         .search-button {
@@ -142,6 +148,32 @@
                 color: #aaaaaa;
             }
         }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 32px;
+            }
+
+            .nav-button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .search-input, .search-button {
+                width: 100%;
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .footer {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -176,12 +208,12 @@
 
         // Initialize Lunr.js
         var idx = lunr(function () {
-            this.field('title')
-            this.field('content')
+            this.field('title');
+            this.field('content');
 
             pages.forEach(function (page) {
-                this.add(page)
-            }, this)
+                this.add(page);
+            }, this);
         });
 
         function submitSearch() {
