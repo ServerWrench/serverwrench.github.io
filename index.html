@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ServerWrench</title>
+    <!-- Include Lunr.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
     <style>
+        /* Add your CSS styles here */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -143,10 +146,73 @@
                 <input type="text" class="search-input" placeholder="Search..." id="searchInput">
                 <button class="search-button" onclick="submitSearch()">Enter</button>
             </div>
+            <div id="searchResults"></div>
         </div>
     </div>
 
     <script>
+        // Sample data for search index (replace with your actual website content)
+        var pages = [
+            { "title": "Home", "content": "Welcome to the homepage.", "url": "index.html" },
+            { "title": "Login", "content": "Login to your account.", "url": "login.html" },
+            { "title": "Sign Up", "content": "Create a new account.", "url": "signup.html" },
+            { "title": "Dashboard", "content": "View your dashboard.", "url": "dashboard.html" },
+        ];
+
+        // Initialize Lunr.js
+        var idx = lunr(function () {
+            this.field('title')
+            this.field('content')
+
+            pages.forEach(function (page) {
+                this.add(page)
+            }, this)
+        });
+
+        function submitSearch() {
+            var query = document.getElementById('searchInput').value;
+            if (query) {
+                const currentUrl = window.location.href;
+                const newUrl = currentUrl.includes('?') 
+                    ? `${currentUrl}&q=${encodeURIComponent(query)}` 
+                    : `${currentUrl}?q=${encodeURIComponent(query)}`;
+                window.location.href = newUrl;
+            }
+        }
+
+        function displayResults(results) {
+            var searchResults = document.getElementById('searchResults');
+            searchResults.innerHTML = ''; // Clear previous results
+            if (results.length > 0) {
+                results.forEach(function (result) {
+                    var page = pages[result.ref];
+                    var resultItem = document.createElement('div');
+                    resultItem.innerHTML = `<h3>${page.title}</h3><p>${page.content}</p><a href="${page.url}">Read More</a>`;
+                    searchResults.appendChild(resultItem);
+                });
+            } else {
+                searchResults.innerHTML = '<p>No results found</p>';
+            }
+        }
+
+        // Perform search based on URL parameter
+        function performSearchFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            if (query) {
+                document.getElementById('searchInput').value = query;
+                const results = idx.search(query);
+                displayResults(results);
+            }
+        }
+
+        // Handle Enter key press
+        document.getElementById('searchInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                submitSearch();
+            }
+        });
+
         function applyColorScheme() {
             const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
             if (darkMode) {
@@ -158,29 +224,14 @@
             }
         }
 
-        function submitSearch() {
-            const searchInput = document.getElementById('searchInput').value;
-            if (searchInput) {
-                const currentUrl = window.location.href;
-                const newUrl = currentUrl.includes('?') 
-                    ? `${currentUrl}&q=${encodeURIComponent(searchInput)}` 
-                    : `${currentUrl}?q=${encodeURIComponent(searchInput)}`;
-                window.location.href = newUrl;
-            }
-        }
-
         // Apply color scheme on load
         applyColorScheme();
 
         // Listen for changes in color scheme preference
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyColorScheme);
 
-        // Add event listener for Enter key press
-        document.getElementById('searchInput').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                submitSearch();
-            }
-        });
+        // Perform search based on URL on page load
+        window.onload = performSearchFromURL;
     </script>
 </body>
 </html>
